@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class deptManager : MonoBehaviour
 {
     possessionManager pM;
 
-    private TMP_Text valueText;
+    private Text valueText;
 
     [Header("èâä˙éÿã‡")]
     [SerializeField]
@@ -26,7 +27,7 @@ public class deptManager : MonoBehaviour
 
     void Start()
     {
-        valueText = transform.Find("DeptManager/ValueText").gameObject.GetComponent<TMP_Text>();
+        valueText = transform.Find("DeptManager/ValueText").gameObject.GetComponent<Text>();
         valueText.text = Mathf.FloorToInt(startMoney).ToString("c");
     }
 
@@ -54,5 +55,6 @@ public class deptManager : MonoBehaviour
     public void AddLoan(int loan)
     {
         startMoney += loan;
+        valueText.text = Mathf.FloorToInt(startMoney).ToString("c");
     }
 }

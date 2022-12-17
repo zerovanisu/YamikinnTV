@@ -15,12 +15,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce = 10f;
 
+    [SerializeField]
+    private float maxjump;
+
     private float speed;
 
-    private int jumpCount = 0;
 
     private float x_val;
-    private bool jumpFlg;
+    private float jumppower;
+
+    public bool jumpFlg;
+    private bool nowJumpFlg;
+
 
     void Start()
     {
@@ -53,23 +59,29 @@ public class PlayerController : MonoBehaviour
     {
         x_val = Input.GetAxis("Horizontal");
 
+
+
         if (Input.GetKeyDown(KeyCode.Space) && jumpFlg)
         {
-            jump();
+            jumppower = this.transform.position.y + maxjump;
+            nowJumpFlg = true;
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Floor"))
+        if (maxjump <= this.transform.position.y)
         {
-            jumpFlg= true;
+            nowJumpFlg = false;
         }
-    }
-    void jump()
-    {
-        rb.AddForce(Vector2.up * jumpForce);
-        jumpFlg = false;
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            nowJumpFlg = false;
+        }
+
+        if(nowJumpFlg&& maxjump >= this.transform.position.y)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+
     }
 
 }

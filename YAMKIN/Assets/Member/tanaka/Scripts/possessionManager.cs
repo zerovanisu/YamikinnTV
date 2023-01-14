@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class possessionManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class possessionManager : MonoBehaviour
 
     deptManager dM;
 
-    private TMP_Text valueText;
+    private Text valueText;
 
     [Header("èâä˙éùÇøã‡")]
     [SerializeField]
@@ -27,7 +28,7 @@ public class possessionManager : MonoBehaviour
     }
     void Start()
     {
-        valueText = transform.Find("PossessionManager/ValueText").gameObject.GetComponent<TMP_Text>();
+        valueText = transform.Find("PossessionManager/ValueText").gameObject.GetComponent<Text>();
         valueText.text = Mathf.FloorToInt(startMoney).ToString("c");
         dM = this.gameObject.GetComponent<deptManager>();
     }
